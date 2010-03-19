@@ -1,0 +1,26 @@
+Class::Homonymous_Union - a union of homonymous packages making up a class
+
+Imagine three developers want to work on the same package, but as
+different files. So that everybody edits a file called Synopsis.pm,
+although from different directories. As the package file name is
+always the same, they can't simply set up inheritance to form a
+union. Unless they use Class::Homonymous_Union, which enables
+inheritance from homonymous packages.
+
+
+The output 'cover -test' with a modified t/03_hardly_reachable.t, so
+that the error does not happen in the external script, but is checked
+manually outside:
+
+----------------------------------- ------ ------ ------ ------ ------ ------
+File                                  stmt   bran   cond    sub   time  total
+----------------------------------- ------ ------ ------ ------ ------ ------
+blib/lib/Class/Homonymous_Union.pm   100.0  100.0    n/a  100.0  100.0  100.0
+Total                                100.0  100.0    n/a  100.0  100.0  100.0
+----------------------------------- ------ ------ ------ ------ ------ ------
+
+The 100% coverage are relative to what can be tested. The particular
+spot where additional code is added if $^S isn't set refers to a fatal
+failure. While it is tested in the unmodified t/03_hardly_reachable.t
+through an external script, Devel::Cover won't see that. Therefore the
+manual check with a modified version.

@@ -1,0 +1,116 @@
+=pod
+
+=head1 NAME
+
+Class::Homonymous_Union - a union of homonymous packages making up a class
+
+=head1 SYNOPSIS
+
+	package main; # to leave no doubt
+	BEGIN { $Class::Homonymous_Union::DEBUG = 1; } # optional
+	use Class::Homonymous_Union 'branch_1', 'branch_2';
+
+	# ... while the following could be in another package
+	use Synopsis;
+
+	my $obj = bless( \(my $o = 0), 'Synopsis');
+	$obj->found_in_A;
+	$obj->found_in_B;
+	$obj->found_in_C;
+	exit(0);
+	
+=head2 Contents of Synopsis.pm
+
+	package Synopsis;
+	use Class::Homonymous_Union sub{eval shift};
+	
+	sub found_in_A() { print "C pkg name: ",__PACKAGE__,"\n"; };
+	#sub found_in_B() { print "C pkg name: ",__PACKAGE__,"\n"; };
+	#sub found_in_C() { print "C pkg name: ",__PACKAGE__,"\n"; };
+
+=head2 Contents of branch_1/Synopsis.pm
+
+	# Almost same as above
+	package Synopsis;
+	use Class::Homonymous_Union sub{eval shift}; # not required
+	
+	#sub found_in_A() { print "A pkg name: ",__PACKAGE__,"\n"; };
+	sub found_in_B() { print "A pkg name: ",__PACKAGE__,"\n"; };
+	#sub found_in_C() { print "A pkg name: ",__PACKAGE__,"\n"; };
+
+=head2 Contents of branch_2/Synopsis.pm
+
+	# Almost same as above
+	package Synopsis;
+	use Class::Homonymous_Union sub{eval shift}; # optional
+	
+	#sub found_in_A() { print "B pkg name: ",__PACKAGE__,"\n"; };
+	#sub found_in_B() { print "B pkg name: ",__PACKAGE__,"\n"; };
+	sub found_in_C() { print "B pkg name: ",__PACKAGE__,"\n"; };
+
+=head2 Output of Main Program
+
+	#--- Starting debugging.
+	| @BRANCHES set to branch_1, branch_2
+	#--- Ending debugging.
+	#--- Starting debugging.
+	| Package name 'Synopsis'.
+	| Package file 'Synopsis.pm'.
+	| Trying directory 'branch_1'.
+	| Using file 'branch_1/Synopsis.pm'.
+	| Loading as package 'Synopsis_TMP100'.
+	| Trying directory 'branch_2'.
+	| Using file 'branch_2/Synopsis.pm'.
+	| Loading as package 'Synopsis_TMP101'.
+	| Resulting ISA: Synopsis_TMP100, Synopsis_TMP101
+	#--- Ending debugging.
+	A pkg name: Synopsis
+	B pkg name: Synopsis_TMP100
+	C pkg name: Synopsis_TMP101
+
+=head1 DESCRIPTION
+
+This tiny module is a special development aid and violates common OO semantics in a controlled fashion. Homonymous means having same name and it's used in a context of packages with the same fully qualified name forming a union.
+
+Imagine three developers want to work on the same package, but in different files. So that everybody edits a file called Synopsis.pm, although from different directories. As the package file name is always the same, they can't simply set up inheritance to form a union. Unless they use Class::Homonymous_Union, which enables inheritance from homonymous packages.
+
+Developers need to control their saving instinct, so that it's not too frustrating to share their work in progress. Meaning that time windows where their copy doesn't compile should be kept small.
+
+=head2 Usage
+
+If you want to pass a visit point, it has to be the first argument. A visit point is expressed through sub{eval shift}, or any other code reference. It gives access to the package and activates the union. Activation is only required in the master package, which is relative to the developer. However, it doesn't harm to activate all packages of the union, because the one (or first, if there are two) found in @INC is the master.
+
+Any remaining arguments are used as directory names in the search path for homonymous packages.
+
+Optionally you can turn on debugging by putting the following line into your main program and before the package is used. If you see the error 'Modification of a read-only value attempted', then the setting comes too late.
+
+	BEGIN { $Class::Homonymous_Union::DEBUG = 1; }
+
+That's it. No other public interface components.
+
+=head1 BUGS AND LIMITATIONS
+
+Please report unknown bugs via the "CPAN Request Tracker", which is the default way of managing such reports. If that is too much of hassle, then just drop me a note to the e-mail address below.
+
+http://rt.cpan.org/NoAuth/Bugs.html?Dist=Class-Homonymous_Union
+
+This module isn't taint safe, because you use contents from files writeable by others. The feature requires mutual trust.
+
+The branch of a fatal error outside eval() can't be checked with 'cover -test' and Test::Simple simultaneously. The current solution is to have the check in Test::Simple, so that only 99.1% coverage is reported, although it's actually 100%.
+
+=head1 AUTHOR
+
+Winfried Trumper E<lt>pub+perl(a)wt.tuxomania.netE<gt>
+
+=head2 COPYRIGHT
+
+Copyright (C) 2010 Winfried Trumper
+
+This module is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+Similar approaches can be found in L<Package::Transporter>.
+
+=cut
