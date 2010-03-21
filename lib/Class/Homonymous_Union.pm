@@ -3,9 +3,11 @@ use strict;
 use warnings;
 use Carp qw();
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
-our $DEBUG //= 0;
+#our $DEBUG //= 0; #5.10.0 only
+our $DEBUG;
+$DEBUG = 0 unless(defined($DEBUG));
 Internals::SvREADONLY($DEBUG, 1);
 sub DEBUG() { $DEBUG };
 
@@ -76,11 +78,13 @@ sub import($$;@) {
 
 	my $counter = 100;
 	my @HOMONYMOUS = ();
+	my $fqpf = exists($INC{$pkg_file}) ? $INC{$pkg_file} : '';
 	foreach my $directory (@inc) {
 		print STDERR "| Trying directory '$directory'.\n" if (DEBUG);
 		next unless (-d $directory);
 
 		my $candidate = "$directory/$pkg_file";
+		next if($candidate eq $fqpf);
 		next unless (-f $candidate);
 		print STDERR "| Using file '$candidate'.\n" if (DEBUG);
 

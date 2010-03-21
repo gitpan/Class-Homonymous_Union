@@ -24,15 +24,15 @@ SHA1 3034730dbcc87f30cf933572b599a9a9ed781ec6 examples/Synopsis.pm
 SHA1 916e6163fbfb1f28eac2ee07fd50a5d9ac78163a examples/branch_1/Synopsis.pm
 SHA1 c503ed1d931aad594a41965481d9e7cc4a743b06 examples/branch_2/Synopsis.pm
 SHA1 9d74bf8e30bd992a90e0055e0636ab53b3b5ce58 examples/synopsis.pl
-SHA1 50a12bea72949ce4225d56984b2f26089679eee1 lib/Class/Homonymous_Union.pm
-SHA1 52ba530c2073040d13414dfdb7109a02d89a3bf7 lib/Class/Homonymous_Union.pod
-SHA1 36e765c153fad9543fa1b6fd64b0189b966052f0 t/01_debug.t
-SHA1 f59de3255a25522f8a23e3a079b04ac39773ac88 t/02_plausibility.t
+SHA1 4bb305ce85fd6fa26704ccdc6fb1d62fa0471850 lib/Class/Homonymous_Union.pm
+SHA1 00ca176f51855aada3cd8866e16d0b42484dadb1 lib/Class/Homonymous_Union.pod
+SHA1 c60ac48f33f42e1387c4edc00f138c67f0d8e4b1 t/01_debug.t
+SHA1 36b7de86228c86657dc3af6b75788445b6fcde45 t/02_plausibility.t
 SHA1 ae4d3d9d5297791676bd2a28010af89cf2b074ed t/03_hardly_reachable.pl
-SHA1 17e8b13d47f2b92acd3d7db8fa91aee6110f17fd t/03_hardly_reachable.t
+SHA1 c2eb2eb203590054387fabd0a854a8bbdfb64eb7 t/03_hardly_reachable.t
 SHA1 c10f6fbce05b3bee4ec379c27ed98cb1402fd5c0 t/branch_1/ABC.pm
 SHA1 7b565460348d4c891b320ae93559cde5b56c61d6 t/branch_1/_BC.pm
-SHA1 e850614df8da947b5155774b70c58287caa7d8e9 t/branch_1/__C.pm
+SHA1 2b6189191cf5ed57b650f232567a75e6a110fd16 t/branch_1/__C.pm
 SHA1 c41d2d52b4c44113127ee2c2ae69ba32c554ffa5 t/branch_2/_BC.pm
 SHA1 674e8279f0c96261fdd9aa00d593f413177e7b96 t/branch_2/__C.pm
 SHA1 43fce171f211f2536a9fd44ecd6e7e0f9b84a40e t/branch_3/ABC.pm
@@ -41,7 +41,7 @@ SHA1 0a6e9f44747a97cf9bff2fa18b545217c64d2d13 t/branch_3/__C.pm
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.9 (GNU/Linux)
 
-iEYEARECAAYFAkuj6jMACgkQdnhEwsG7x7owHgCeJ2CeT4rMU2/wYvfBpN5XNE5f
-N6wAoLabP/CZVFLoJH+NWsIasaY9Bzbd
-=4+f0
+iEYEARECAAYFAkulZd4ACgkQdnhEwsG7x7ofoQCfZwbXz6kcpd7FLvEDoo95OyuN
+hsAAoIN+UuTfzizIoPLxPBMGIT5ffdkK
+=rjSj
 -----END PGP SIGNATURE-----
