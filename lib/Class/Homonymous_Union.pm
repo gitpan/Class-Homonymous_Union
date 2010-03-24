@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Carp qw();
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 #our $DEBUG //= 0; #5.10.0 only
 our $DEBUG;

@@ -1,2 +1,10 @@
+0.03	23 March 2010
+	- remove SIGNATURE, it has little benefit and produces bug reports
+	- added changes
+
+0.02	21 March 2010
+	- never inherit from myself
+	- updated documentation
+
 0.01	18 March 2010
 	- initial release

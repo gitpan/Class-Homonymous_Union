@@ -106,7 +106,7 @@ The branch of a fatal error outside eval() can't be checked with 'cover -test' a
 
 Winfried Trumper E<lt>pub+perl(a)wt.tuxomania.netE<gt>
 
-=head2 COPYRIGHT
+=head2 Copyright and License
 
 Copyright (C) 2010 Winfried Trumper
 
